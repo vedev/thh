@@ -10,7 +10,7 @@ $scheme = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https' : 'htt
 $target = $thh->target($host);
 
 if (is_string($target))
-    header("Location: $scheme://$target", true, 301);
+    header("Location: $scheme://$target".$_SERVER['REQUEST_URI'], true, 301);
 else
     http_response_code(404);
 
