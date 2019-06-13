@@ -1,0 +1,3 @@
+target0.test host0.text
+target1.test host1.text host2.text
+target2.test host3.text host4.text host5.text
