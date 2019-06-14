@@ -6,7 +6,8 @@
 
 $thh = new Thh('chains.thh');
 $host = idn_to_utf8($_SERVER['HTTP_HOST'], IDNA_DEFAULT, INTL_IDNA_VARIANT_UTS46);
-$scheme = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https' : 'http';;
+$host = ltrim(mb_strtolower($host), 'www.'); 
+$scheme = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https' : 'http';
 $target = $thh->target($host);
 
 if (is_string($target))
