@@ -4,10 +4,16 @@
 #error_reporting(E_ALL);
 #ini_set('display_errors', 1);
 
+function isSecure() {
+    return
+        (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+        || $_SERVER['SERVER_PORT'] == 443;
+}
+
 $thh = new Thh('chains.thh');
 $host = idn_to_utf8($_SERVER['HTTP_HOST'], IDNA_DEFAULT, INTL_IDNA_VARIANT_UTS46);
 $host = ltrim(mb_strtolower($host), 'www.'); 
-$scheme = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https' : 'http';
+$scheme = isSecure() ? 'https' : 'http';
 $target = $thh->target($host);
 
 if (is_string($target))
